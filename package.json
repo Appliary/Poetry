@@ -1,0 +1,16 @@
+{
+  "name": "poetry",
+  "version": "0.0.1",
+  "description": "Out-of-the-box framework for NodeJS Microservices",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "echo \"Under construction. CLI will be added soon.\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MicCarr <miccarr@me.com>",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^14.1.0",
+    "inert": "^4.0.1"
+  }
+}
