@@ -13,6 +13,9 @@
   "dependencies": {
     "hapi": "^14.1.0",
     "inert": "^4.0.1",
+    "sails-memory": "^0.10.7",
+    "sails-mongo": "^0.12.1",
+    "waterline": "^0.12.2",
     "winston": "^2.2.0"
   }
 }
