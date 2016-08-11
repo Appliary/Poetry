@@ -13,6 +13,7 @@
   "dependencies": {
     "hapi": "^14.1.0",
     "inert": "^4.0.1",
+    "multicast-events": "^2.1.2",
     "sails-memory": "^0.10.7",
     "sails-mongo": "^0.12.1",
     "waterline": "^0.12.2",
