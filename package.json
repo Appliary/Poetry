@@ -15,6 +15,7 @@
     "inert": "^4.0.1",
     "multicast-events": "^2.1.2",
     "patrun": "^0.5.0",
+    "sails-disk": "^0.10.10",
     "sails-memory": "^0.10.7",
     "sails-mongo": "^0.12.1",
     "waterline": "^0.12.2",
