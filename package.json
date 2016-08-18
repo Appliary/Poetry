@@ -11,6 +11,7 @@
   "author": "MicCarr <miccarr@me.com>",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.0.1",
     "hapi": "^14.1.0",
     "inert": "^4.0.1",
     "multicast-events": "^2.1.2",
