@@ -1,29 +1,30 @@
 {
-    "name": "poetry",
-    "version": "0.0.7",
-    "description": "Out-of-the-box framework for NodeJS Microservices",
-    "repository": "git+https://github.com/Appliary/Poetry.git",
-    "main": "lib/index.js",
-    "scripts": {
-        "start": "echo \"Under construction. CLI will be added soon.\" && exit 1",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "engines": {
-        "node": ">=5.4.0"
-    },
-    "author": "MicCarr <miccarr@me.com>",
-    "license": "ISC",
-    "dependencies": {
-        "async": "^2.0.1",
-        "debug": "^2.2.0",
-        "hapi": "^14.1.0",
-        "hapi-session-mongo": "^3.0.1",
-        "inert": "^4.0.1",
-        "multicast-events": "^2.1.2",
-        "patrun": "^0.5.0",
-        "sails-disk": "^0.10.10",
-        "sails-mongo": "^0.12.1",
-        "waterline": "^0.12.2",
-        "winston": "^2.2.0"
-    }
+  "name": "poetry",
+  "version": "0.0.7",
+  "description": "Out-of-the-box framework for NodeJS Microservices",
+  "repository": "git+https://github.com/Appliary/Poetry.git",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "echo \"Under construction. CLI will be added soon.\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=5.4.0"
+  },
+  "author": "MicCarr <miccarr@me.com>",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.1",
+    "buffertools": "^2.1.4",
+    "debug": "^2.2.0",
+    "hapi": "^14.1.0",
+    "hapi-session-mongo": "^3.0.1",
+    "inert": "^4.0.1",
+    "multicast-events": "^2.1.2",
+    "patrun": "^0.5.0",
+    "sails-disk": "^0.10.10",
+    "sails-mongo": "^0.12.1",
+    "waterline": "^0.12.2",
+    "winston": "^2.2.0"
+  }
 }
