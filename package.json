@@ -1,6 +1,6 @@
 {
   "name": "poetry",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Out-of-the-box framework for NodeJS Microservices",
   "repository": "git+https://github.com/Appliary/Poetry.git",
   "main": "lib/index.js",
@@ -26,10 +26,7 @@
     "jugglingdb-mongodb": "^0.2.0",
     "multicast-events": "^2.1.2",
     "patrun": "^0.5.0",
-    "sails-disk": "^0.10.10",
-    "sails-mongo": "^0.12.1",
     "synchronize": "^0.9.15",
-    "waterline": "^0.12.2",
     "winston": "^2.2.0"
   }
 }
