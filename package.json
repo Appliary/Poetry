@@ -22,10 +22,13 @@
     "hapi": "^14.1.0",
     "hapi-session-mongo": "^3.0.1",
     "inert": "^4.0.1",
+    "jugglingdb": "^2.0.0-rc8",
+    "jugglingdb-mongodb": "^0.2.0",
     "multicast-events": "^2.1.2",
     "patrun": "^0.5.0",
     "sails-disk": "^0.10.10",
     "sails-mongo": "^0.12.1",
+    "synchronize": "^0.9.15",
     "waterline": "^0.12.2",
     "winston": "^2.2.0"
   }
