@@ -14,6 +14,11 @@ appl.command( 'new:microservice' )
     .description( '│  New microservice                        │' )
     .action( require( './new/microservice' ) );
 
+appl.command( 'new:app' )
+    .description( '│  New front-end angular application       │' )
+    .action( require( './new/app' ) );
+
+
 appl.command( 'new:theme' )
     .description( '│  New theme                               │' )
     .action( require( './new/theme' ) );
