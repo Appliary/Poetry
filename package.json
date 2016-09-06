@@ -27,7 +27,6 @@
     "multicast-events": "^2.1.2",
     "patrun": "^0.5.0",
     "portfinder": "^1.0.7",
-    "synchronize": "^0.9.15",
     "winston": "^2.2.0"
   }
 }
