@@ -26,7 +26,6 @@
     "jugglingdb-mongodb": "^0.2.0",
     "multicast-events": "^2.1.2",
     "patrun": "^0.5.0",
-    "portfinder": "^1.0.7",
     "winston": "^2.2.0"
   }
 }
