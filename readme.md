@@ -27,8 +27,80 @@ Register a new route handled by the MicroService. The `routeOptions` are used by
 
 Everything's given to the local microservice HAPI web server, and sent for registration to the Web Gateway. If more than one microservice listen the same route, they will be equally balanced.
 
-### ORM (JugglingDB)
-> _Todo_
+### ORM (Promised Mongo)
+#### Collection
+
+#####`db.collection.aggregate([pipeline], callback)`
+
+#####`db.collection.count([query], callback)`
+
+#####`db.collection.createIndex(keys, options, [callback])`
+
+#####`db.collection.distinct(field, query, callback)`
+
+#####`db.collection.drop([callback])`
+
+#####`db.collection.dropIndex(index, [callback])`
+
+#####`db.collection.dropIndexes([callback])`
+
+#####`db.collection.ensureIndex(keys, options, [callback])`
+
+#####`db.collection.find([criteria], [projection], [callback])`
+
+This function applies a query to a collection. You can get the return value, which is a cursor, or pass a callback
+as the last parameter. Said callback receives `(err, documents)`
+
+#####`db.collection.findOne([criteria], [projection], callback)`
+
+Apply a query and get one single document passed as a callback. The callback receives `(err, document)`
+
+#####`db.collection.findAndModify(document, callback)`
+
+#####`db.collection.getIndexes(callback)`
+
+#####`db.collection.group(document, callback)`
+
+#####`db.collection.insert(docOrDocs, callback)`
+
+#####`db.collection.isCapped(callback)`
+
+#####`db.collection.mapReduce(map, reduce, options, callback)`
+
+#####`db.collection.reIndex(callback)`
+
+#####`db.collection.remove(query, [justOne], [callback])`
+
+#####`db.collection.runCommand(command, callback)`
+
+#####`db.collection.save(doc, callback)`
+
+#####`db.collection.stats(callback)`
+
+#####`db.collection.update(query, update, [options], callback)`
+
+#### Cursor
+
+#####`cursor.batchSize(size, [callback])`
+
+#####`cursor.count(callback)`
+
+#####`cursor.explain(callback)`
+
+#####`cursor.forEach(function)`
+
+#####`cursor.limit(n, [callback])`
+
+#####`cursor.map(function, [callback])`
+
+#####`cursor.next(callback)`
+
+#####`cursor.skip(n, [callback])`
+
+#####`cursor.sort(sortOptions, [callback])`
+
+#####`cursor.toArray(callback)`
+
 
 ### Logging (winston)
 #### Poetry.log.silly(_..._ `message`)
