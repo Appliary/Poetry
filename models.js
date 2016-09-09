@@ -1,5 +1,5 @@
 const Mongo = require( 'promised-mongo' ),
-    Log = require('./lib/methods/log'),
+    Log = require( './lib/methods/log' ),
     local = 'localhost:27017/database';
 
 // Are the env. variables set ?
@@ -8,9 +8,9 @@ if ( url ) url += '/database';
 else url = process.env.DATABASE || process.env.database;
 
 // Otherwise, localhost default config
-url = local;
+if ( !url ) url = local;
 
-Log.info('Using MongoDB', url);
+Log.info( 'Using MongoDB', url );
 
 module.exports = new Proxy( Mongo( url ), {
     get( db, model ) {
