@@ -1,6 +1,6 @@
 {
   "name": "poetry",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Out-of-the-box framework for NodeJS Microservices",
   "repository": "git+https://github.com/Appliary/Poetry.git",
   "main": "lib/index.js",
@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.0.1",
+    "boom": "^4.0.0",
     "buffertools": "^2.1.4",
     "cli": "^1.0.0",
     "commander": "^2.9.0",
