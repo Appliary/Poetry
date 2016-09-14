@@ -52,8 +52,10 @@ module.exports = new Proxy( Mongo( url ), {
 
                 return function () {
                     let args = arguments;
+                    let returnValue = false;
 
                     if ( method == 'set' ) {
+                        returnValue = true;
                         if ( !args[ 2 ] ) args[ 2 ] = {};
                         if ( args[ 2 ].new === undefined ) args[ 2 ].new = true;
                         args[ 2 ].query = args[ 0 ];
@@ -80,7 +82,8 @@ module.exports = new Proxy( Mongo( url ), {
 
                         promise.then( ( result ) => {
 
-                                resolve( result );
+                                if(returnValue) resolve( result.value );
+                                else resolve( result );
 
                                 args.result = result;
                                 if ( method == 'findandmodify' ) method = 'update';
