@@ -41,12 +41,10 @@ module.exports = new Proxy( Mongo( url ), {
         if ( model.charAt( model.length - 1 ) != 's' )
             model += 's';
 
-        db[ model ].set == db[ model ].update;
-
         return new Proxy( db[ model ], {
             get( modelORM, method ) {
 
-                if ( typeof modelORM[ method ] !== 'function' )
+                if ( typeof modelORM[ method ] !== 'function' && method != 'set' )
                     return modelORM[ method ];
 
                 if ( method == 'create' ) method = 'insert';
@@ -57,7 +55,7 @@ module.exports = new Proxy( Mongo( url ), {
 
                     if ( method == 'set' ) {
                         if ( !args[ 2 ] ) args[ 2 ] = {};
-                        if ( !args[ 2 ].new ) args[ 2 ].new = true;
+                        if ( args[ 2 ].new === undefined ) args[ 2 ].new = true;
                         args[ 2 ].query = args[ 0 ];
                         args[ 2 ].update = {
                             $set: args[ 1 ]
