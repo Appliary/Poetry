@@ -56,10 +56,13 @@ module.exports = new Proxy( Mongo( url ), {
                     let args = arguments;
 
                     if ( method == 'set' ) {
-                        method = 'update';
-                        args[ 1 ] = {
+                        if ( !args[ 2 ] ) args[ 2 ] = {};
+                        if ( !args[ 2 ].new ) args[ 2 ].new: true;
+                        args[ 2 ].query = args[ 0 ];
+                        args[ 2 ].update = {
                             $set: args[ 1 ]
                         };
+                        method = 'findAndModify';
                     }
 
                     return new Promise( ( resolve, reject ) => {
@@ -71,10 +74,10 @@ module.exports = new Proxy( Mongo( url ), {
                                 resolve( result );
 
                                 args.result = result;
-                                if( method == 'findandmodify') method = 'update';
+                                if ( method == 'findandmodify' ) method = 'update';
                                 Events.emit( method + ':' + model.slice( 0, -1 ), args );
 
-                                if( method == 'update' || method == 'insert' ){
+                                if ( method == 'update' || method == 'insert' ) {
                                     args.method = method;
                                     Events.emit( 'save:' + model.slice( 0, -1 ), args );
                                 }
