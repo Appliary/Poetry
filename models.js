@@ -31,6 +31,9 @@ module.exports = new Proxy( Mongo( url ), {
     get( db, model ) {
         if ( typeof model !== 'string' ) return undefined;
 
+        if( model == 'ObjectId' || model == 'ObjectID' )
+            return db.ObjectId;
+
         model = model.toLowerCase();
         if ( model.charAt( model.length - 1 ) != 's' )
             model += 's';
