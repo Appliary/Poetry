@@ -57,13 +57,26 @@ module.exports = new Proxy( Mongo( url ), {
 
                     if ( method == 'set' ) {
                         if ( !args[ 2 ] ) args[ 2 ] = {};
-                        if ( !args[ 2 ].new ) args[ 2 ].new: true;
+                        if ( !args[ 2 ].new ) args[ 2 ].new = true;
                         args[ 2 ].query = args[ 0 ];
                         args[ 2 ].update = {
                             $set: args[ 1 ]
                         };
                         method = 'findAndModify';
+                        args = {
+                            '0': args[ 2 ]
+                        };
                     }
+
+                    if ( method == 'insert' || method == 'save' )
+                        if ( !args[ 0 ].createdAt )
+                            args[ 0 ].createdAt = Date.now();
+
+                    if ( method == 'update' || method == 'save' )
+                        args[ 0 ].updatedAt = Date.now();
+
+                    if ( method == 'findAndModify' && args[ 1 ] && args[ 1 ].$set )
+                        args[ 1 ].$set.updatedAt = Date.now();
 
                     return new Promise( ( resolve, reject ) => {
 
