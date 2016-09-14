@@ -61,9 +61,7 @@ module.exports = new Proxy( Mongo( url ), {
                             $set: args[ 1 ]
                         };
                         method = 'findAndModify';
-                        args = {
-                            '0': args[ 2 ]
-                        };
+                        args = [ args[ 2 ] ];
                     }
 
                     if ( method == 'insert' || method == 'save' )
@@ -73,8 +71,8 @@ module.exports = new Proxy( Mongo( url ), {
                     if ( method == 'update' || method == 'save' )
                         args[ 0 ].updatedAt = Date.now();
 
-                    if ( method == 'findAndModify' && args[ 1 ] && args[ 1 ].$set )
-                        args[ 1 ].$set.updatedAt = Date.now();
+                    if ( method == 'findAndModify' && args[ 0 ] && args[ 0 ].update && args[ 0 ].update.$set )
+                        args[ 0 ].update.$set.updatedAt = Date.now();
 
                     return new Promise( ( resolve, reject ) => {
 
