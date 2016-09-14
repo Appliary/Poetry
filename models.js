@@ -41,6 +41,8 @@ module.exports = new Proxy( Mongo( url ), {
         if ( model.charAt( model.length - 1 ) != 's' )
             model += 's';
 
+        db[ model ].set == db[ model ].update;
+
         return new Proxy( db[ model ], {
             get( modelORM, method ) {
 
@@ -53,6 +55,13 @@ module.exports = new Proxy( Mongo( url ), {
                 return function () {
                     let args = arguments;
 
+                    if ( method == 'set' ) {
+                        method = 'update';
+                        args[ 1 ] = {
+                            $set: args[ 1 ]
+                        };
+                    }
+
                     return new Promise( ( resolve, reject ) => {
 
                         let promise = modelORM[ method ].apply( modelORM, args );
@@ -62,8 +71,13 @@ module.exports = new Proxy( Mongo( url ), {
                                 resolve( result );
 
                                 args.result = result;
+                                if( method == 'findandmodify') method = 'update';
                                 Events.emit( method + ':' + model.slice( 0, -1 ), args );
 
+                                if( method == 'update' || method == 'insert' ){
+                                    args.method = method;
+                                    Events.emit( 'save:' + model.slice( 0, -1 ), args );
+                                }
                             } )
                             .catch( ( err ) => {
                                 reject( err );
