@@ -44,6 +44,9 @@ module.exports = new Proxy( Mongo( url ), {
         return new Proxy( db[ model ], {
             get( modelORM, method ) {
 
+                if( model == 'find' || model == 'count' || model == 'findOne' )
+                    return modelORM[ method ];
+
                 if ( typeof modelORM[ method ] !== 'function' && method != 'set' )
                     return modelORM[ method ];
 
