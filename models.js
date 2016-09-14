@@ -1,5 +1,6 @@
 const Mongo = require( 'promised-mongo' ),
     Log = require( './lib/methods/log' ),
+    Events = require( './lib/methods/events' ),
     local = 'localhost/database';
 
 // Are the env. variables set ?
@@ -30,14 +31,48 @@ Log.info( 'Using MongoDB', url );
 module.exports = new Proxy( Mongo( url ), {
     get( db, model ) {
         if ( typeof model !== 'string' ) return undefined;
+        if ( ~[ 'inspect', 'valueOf' ].indexOf( model ) )
+            return undefined;
 
-        if( model == 'ObjectId' || model == 'ObjectID' )
+        if ( model == 'ObjectId' || model == 'ObjectID' )
             return db.ObjectId;
 
         model = model.toLowerCase();
         if ( model.charAt( model.length - 1 ) != 's' )
             model += 's';
 
-        return db[ model ];
+        return new Proxy( db[ model ], {
+            get( modelORM, method ) {
+
+                if ( typeof modelORM[ method ] !== 'function' )
+                    return modelORM[ method ];
+
+                if ( method == 'create' ) method = 'insert';
+                if ( method == 'delete' ) method = 'remove';
+
+                return function () {
+                    let args = arguments;
+
+                    return new Promise( ( resolve, reject ) => {
+
+                        let promise = modelORM[ method ].apply( modelORM, args );
+
+                        promise.then( ( result ) => {
+
+                                resolve( result );
+                                if( !~['insert', 'update', 'remove'].indexOf( method ) )
+                                    return;
+
+                                args.result = result;
+                                Events.emit( method + ':' + model.slice( 0, -1 ), args );
+                            } )
+                            .catch( ( err ) => {
+                                reject( err );
+                                Log.warn( model + '.' + method, err );
+                            } );
+                    } );
+                };
+            }
+        } );
     }
 } );
