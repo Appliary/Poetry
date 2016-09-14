@@ -60,11 +60,10 @@ module.exports = new Proxy( Mongo( url ), {
                         promise.then( ( result ) => {
 
                                 resolve( result );
-                                if( !~['insert', 'update', 'remove'].indexOf( method ) )
-                                    return;
 
                                 args.result = result;
                                 Events.emit( method + ':' + model.slice( 0, -1 ), args );
+
                             } )
                             .catch( ( err ) => {
                                 reject( err );
