@@ -44,7 +44,7 @@ module.exports = new Proxy( Mongo( url ), {
         return new Proxy( db[ model ], {
             get( modelORM, method ) {
 
-                if( model == 'find' || model == 'count' || model == 'findone' )
+                if ( ~[ 'find', 'count', 'findone' ].indexOf( method ) )
                     return modelORM[ method ];
 
                 if ( typeof modelORM[ method ] !== 'function' && method != 'set' )
@@ -85,7 +85,7 @@ module.exports = new Proxy( Mongo( url ), {
 
                         promise.then( ( result ) => {
 
-                                if(returnValue) resolve( result.value );
+                                if ( returnValue ) resolve( result.value );
                                 else resolve( result );
 
                                 args.result = result;
