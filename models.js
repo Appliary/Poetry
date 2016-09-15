@@ -44,7 +44,7 @@ module.exports = new Proxy( Mongo( url ), {
         return new Proxy( db[ model ], {
             get( modelORM, method ) {
 
-                if( model == 'find' || model == 'count' || model == 'findOne' )
+                if( model == 'find' || model == 'count' || model == 'findone' )
                     return modelORM[ method ];
 
                 if ( typeof modelORM[ method ] !== 'function' && method != 'set' )
@@ -90,11 +90,11 @@ module.exports = new Proxy( Mongo( url ), {
 
                                 args.result = result;
                                 if ( method == 'findandmodify' ) method = 'update';
-                                Events.emit( method + ':' + model.slice( 0, -1 ), args );
+                                Events.emit( method + ':' + model, args );
 
                                 if ( method == 'update' || method == 'insert' ) {
                                     args.method = method;
-                                    Events.emit( 'save:' + model.slice( 0, -1 ), args );
+                                    Events.emit( 'save:' + model, args );
                                 }
                             } )
                             .catch( ( err ) => {
