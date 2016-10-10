@@ -11,7 +11,7 @@ if ( !url ) {
     if (
         process.env.MONGODB_MONGO_CLUSTER_1_PORT &&
         process.env.MONGODB_MONGO_CLUSTER_2_PORT && process.env.MONGODB_MONGO_CLUSTER_3_PORT
-    ) url = 'mongodb://mongodb_mongo-cluster_1';
+    ) url = 'mongodb://mongodb_mongo-cluster_1/database';
     else {
         url = process.env.DATABASE_PORT || process.env.database_port;
         if ( url ) {
