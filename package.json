@@ -14,6 +14,7 @@
   "author": "MicCarr <miccarr@me.com>",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "async": "^2.0.1",
     "boom": "^4.0.0",
     "buffertools": "^2.1.4",
