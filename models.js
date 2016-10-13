@@ -88,7 +88,7 @@ module.exports = new Proxy( Mongo( url ), {
                                 if ( returnValue ) resolve( result.value );
                                 else resolve( result );
 
-                                args.result = result;
+                                args[ 0 ].result = result;
                                 if ( method == 'findAndModify' ) method = 'update';
                                 Events.emit( method + ':' + model, args );
 
