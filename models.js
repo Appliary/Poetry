@@ -66,7 +66,7 @@ module.exports = new Proxy( Mongo( url ), {
                             $set: args[ 1 ]
                         };
                         method = 'findAndModify';
-                        args = [ args[ 2 ] ];
+                        args = { '0': args[ 2 ] };
                     }
 
                     if ( method == 'insert' || method == 'save' )
@@ -88,7 +88,7 @@ module.exports = new Proxy( Mongo( url ), {
                                 if ( returnValue ) resolve( result.value );
                                 else resolve( result );
 
-                                args[ 0 ].result = result;
+                                args.result = result;
                                 if ( method == 'findAndModify' ) method = 'update';
                                 Events.emit( method + ':' + model, args );
 
