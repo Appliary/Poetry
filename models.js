@@ -89,8 +89,9 @@ module.exports = new Proxy( Mongo( url ), {
 
                         promise.then( ( result ) => {
 
-                                if ( returnValue ) resolve( result.value );
-                                else resolve( result );
+                                if ( returnValue )
+                                    result = result.value;
+                                resolve( result );
 
                                 args.result = result;
                                 if ( method == 'findAndModify' ) method = 'update';
