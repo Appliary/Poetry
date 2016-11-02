@@ -93,15 +93,15 @@ module.exports = new Proxy( Mongo( url ), {
                                     result = result.value;
 
                                 resolve( result );
-                                args.result = result;
+                                // args.result = result;
 
                                 if ( method == 'findAndModify' ) method = 'update';
-                                Events.emit( method + ':' + model, args );
+                                Events.emit( method + ':' + model, result );
 
-                                if ( method == 'update' || method == 'insert' ) {
-                                    args.method = method;
-                                    Events.emit( 'save:' + model, args );
-                                }
+                                // if ( method == 'update' || method == 'insert' ) {
+                                //     args.method = method;
+                                //     Events.emit( 'save:' + model, args );
+                                // }
                             } )
                             .catch( ( err ) => {
                                 reject( err );
