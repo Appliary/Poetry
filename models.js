@@ -59,6 +59,7 @@ module.exports = new Proxy( Mongo( url ), {
 
                     if ( method == 'set' ) {
                         returnValue = true;
+                        console.log('ARGS', args);
                         if ( !args[ 2 ] ) args[ 2 ] = {};
                         if ( args[ 2 ].new === undefined ) args[ 2 ].new = true;
                         args[ 2 ].query = args[ 0 ];
@@ -66,20 +67,21 @@ module.exports = new Proxy( Mongo( url ), {
                             $set: args[ 1 ]
                         };
                         method = 'findAndModify';
-                        args = { '0': args[ 2 ] };
+                        args = [ args[ 2 ] ];
+                        console.log( 'out', args );
                     }
 
                     if ( method == 'insert' || method == 'save' )
                         if ( !args[ 0 ].createdAt )
-                            args[ 0 ].createdAt = Date.now();
+                            args[ 0 ].createdAt = new Date;
 
                     if ( method == 'update' || method == 'save' ) {
-                        args[ 0 ].updatedAt = Date.now();
+                        args[ 0 ].updatedAt = new Date;
                         returnValue = true;
                     }
 
                     if ( method == 'findAndModify' && args[ 0 ] && args[ 0 ].update && args[ 0 ].update.$set ) {
-                        args[ 0 ].update.$set.updatedAt = Date.now();
+                        args[ 0 ].update.$set.updatedAt = new Date;
                         returnValue = true;
                     }
 
