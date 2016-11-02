@@ -59,7 +59,6 @@ module.exports = new Proxy( Mongo( url ), {
 
                     if ( method == 'set' ) {
                         returnValue = true;
-                        console.log('ARGS', args);
                         if ( !args[ 2 ] ) args[ 2 ] = {};
                         if ( args[ 2 ].new === undefined ) args[ 2 ].new = true;
                         args[ 2 ].query = args[ 0 ];
@@ -68,7 +67,6 @@ module.exports = new Proxy( Mongo( url ), {
                         };
                         method = 'findAndModify';
                         args = [ args[ 2 ] ];
-                        console.log( 'out', args );
                     }
 
                     if ( method == 'insert' || method == 'save' )
