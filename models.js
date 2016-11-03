@@ -73,10 +73,11 @@ module.exports = new Proxy( Mongo( url ), {
                         if ( !args[ 0 ].createdAt )
                             args[ 0 ].createdAt = new Date;
 
-                    if ( method == 'update' ) {
+                    if ( method == 'update' || method == 'save' ) {
                         args[ 0 ].updatedAt = new Date;
-                        returnValue = true;
                     }
+
+                    if( method == 'update' ) returnValue = true;
 
                     if ( method == 'findAndModify' && args[ 0 ] && args[ 0 ].update && args[ 0 ].update.$set ) {
                         args[ 0 ].update.$set.updatedAt = new Date;
