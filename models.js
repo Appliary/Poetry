@@ -70,14 +70,20 @@ module.exports = new Proxy( Mongo( url ), {
                     }
 
                     if ( method == 'insert' || method == 'save' )
-                        if ( !args[ 0 ].createdAt )
+                        if ( Array.isArray( args[ 0 ] ) ) {
+                            let d = new Date;
+                            args[ 0 ].forEach( i => {
+                                if ( !args[ 0 ][ i ].createdAt )
+                                    args[ 0 ][ i ].createdAt = d;
+                            } );
+                        } else if ( !args[ 0 ].createdAt )
                             args[ 0 ].createdAt = new Date;
 
                     if ( method == 'update' || method == 'save' ) {
                         args[ 0 ].updatedAt = new Date;
                     }
 
-                    if( method == 'update' ) returnValue = true;
+                    if ( method == 'update' ) returnValue = true;
 
                     if ( method == 'findAndModify' && args[ 0 ] && args[ 0 ].update && args[ 0 ].update.$set ) {
                         args[ 0 ].update.$set.updatedAt = new Date;
