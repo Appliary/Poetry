@@ -72,9 +72,9 @@ module.exports = new Proxy( Mongo( url ), {
                     if ( method == 'insert' || method == 'save' )
                         if ( Array.isArray( args[ 0 ] ) ) {
                             let d = new Date;
-                            args[ 0 ].forEach( i => {
-                                if ( !args[ 0 ][ i ].createdAt )
-                                    args[ 0 ][ i ].createdAt = d;
+                            args[ 0 ].map( entry => {
+                                if ( !entry.createdAt )
+                                    entry.createdAt = d;
                             } );
                         } else if ( !args[ 0 ].createdAt )
                             args[ 0 ].createdAt = new Date;
