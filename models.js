@@ -77,7 +77,7 @@ module.exports = new Proxy( Mongo( url ), {
                                     entry.createdAt = d;
                             } );
                         } else if ( !args[ 0 ].createdAt )
-                            args[ 0 ].createdAt = new Date;
+                        args[ 0 ].createdAt = new Date;
 
                     if ( method == 'update' || method == 'save' ) {
                         args[ 0 ].updatedAt = new Date;
@@ -100,15 +100,18 @@ module.exports = new Proxy( Mongo( url ), {
                                     result = result.value;
 
                                 resolve( result );
-                                // args.result = result;
 
                                 if ( method == 'findAndModify' ) method = 'update';
+
+                                if ( !~[
+                                        'insert',
+                                        'update',
+                                        'save'
+                                    ].indexOf( method ) )
+                                    return;
+
                                 Events.emit( method + ':' + model, result );
 
-                                // if ( method == 'update' || method == 'insert' ) {
-                                //     args.method = method;
-                                //     Events.emit( 'save:' + model, args );
-                                // }
                             } )
                             .catch( ( err ) => {
                                 reject( err );
