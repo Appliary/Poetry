@@ -83,7 +83,8 @@ module.exports = new Proxy( Mongo( url ), {
                         args[ 0 ].updatedAt = new Date();
 
                     if ( method == 'update' ) {
-                        args[ 1 ].updatedAt = new Date();
+                        if ( !args[ 1 ].$set ) args[ 1 ].$set = {};
+                        args[ 1 ].$set.updatedAt = new Date();
                         returnValue = true;
                     }
 
