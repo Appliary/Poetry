@@ -71,22 +71,24 @@ module.exports = new Proxy( Mongo( url ), {
 
                     if ( method == 'insert' || method == 'save' )
                         if ( Array.isArray( args[ 0 ] ) ) {
-                            let d = new Date;
+                            let d = new Date();
                             args[ 0 ].map( entry => {
                                 if ( !entry.createdAt )
                                     entry.createdAt = d;
                             } );
                         } else if ( !args[ 0 ].createdAt )
-                        args[ 0 ].createdAt = new Date;
+                        args[ 0 ].createdAt = new Date();
 
-                    if ( method == 'update' || method == 'save' ) {
-                        args[ 0 ].updatedAt = new Date;
+                    if ( method == 'save' )
+                        args[ 0 ].updatedAt = new Date();
+
+                    if ( method == 'update' ) {
+                        args[ 1 ].updatedAt = new Date();
+                        returnValue = true;
                     }
 
-                    if ( method == 'update' ) returnValue = true;
-
                     if ( method == 'findAndModify' && args[ 0 ] && args[ 0 ].update && args[ 0 ].update.$set ) {
-                        args[ 0 ].update.$set.updatedAt = new Date;
+                        args[ 0 ].update.$set.updatedAt = new Date();
                         returnValue = true;
                     }
 
@@ -113,7 +115,7 @@ module.exports = new Proxy( Mongo( url ), {
                                 Events.emit( method + ':' + model, result );
 
                             } )
-                            .catch( ( err ) => {
+                            .catch( err => {
                                 reject( err );
                                 Log.warn( model + '.' + method, err );
                             } );
