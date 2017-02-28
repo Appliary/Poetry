@@ -54,7 +54,7 @@ module.exports = new Proxy( Mongo( url ), {
             get( modelORM, method ) {
 
                 // Aggregation sugar pipeline builder
-                if ( method.toLowerCase == 'aggregation' )
+                if ( method.toLowerCase() == 'aggregation' )
                     return Aggregation( modelORM );
 
                 // Generic method
