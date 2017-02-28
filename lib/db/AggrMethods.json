@@ -1,0 +1,23 @@
+[
+    "collStats",
+    "project",
+    "match",
+    "redact",
+    "limit",
+    "skip",
+    "unwind",
+    "group",
+    "sample",
+    "sort",
+    "geoNear",
+    "lookup",
+    "out",
+    "indexStats",
+    "facet",
+    "bucket",
+    "bucketAuto",
+    "sortByCount",
+    "addFields",
+    "count",
+    "graphLookup"
+]

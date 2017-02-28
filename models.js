@@ -1,6 +1,7 @@
 const Mongo = require( 'promised-mongo' ),
     Log = require( './lib/methods/log' ),
     Events = require( './lib/methods/events' ),
+    Aggregation = require( './lib/db/Aggregation' ),
     local = 'localhost/database';
 
 // Are the env. variables set ?
@@ -30,29 +31,45 @@ Log.info( 'Using MongoDB', url );
 
 module.exports = new Proxy( Mongo( url ), {
     get( db, model ) {
+
         if ( typeof model !== 'string' ) return undefined;
         if ( ~[ 'inspect', 'valueOf' ].indexOf( model ) )
             return undefined;
 
-        if ( model == 'ObjectId' || model == 'ObjectID' )
-            return db.ObjectId;
-
+        // Format model name (lower case, plurial)
         model = model.toLowerCase();
         if ( model.charAt( model.length - 1 ) != 's' )
             model += 's';
 
+        // English plurial exceptions
+        if ( model == 'persons' || model == 'peoples' )
+            model = 'people';
+
+        // Sugar access to ObjectID
+        if ( model == 'objectids' )
+            return db.ObjectId;
+
+        // Return the Proxy
         return new Proxy( db[ model ], {
             get( modelORM, method ) {
 
+                // Aggregation sugar pipeline builder
+                if ( method.toLowerCase == 'aggregation' )
+                    return Aggregation( modelORM );
+
+                // Generic method
                 if ( ~[ 'find', 'count', 'findone' ].indexOf( method ) )
                     return modelORM[ method ];
 
-                if ( typeof modelORM[ method ] !== 'function' && method != 'set' )
+                // Not a method
+                if ( typeof modelORM[ method ] != 'function' && method != 'set' )
                     return modelORM[ method ];
 
+                // Shortcuts / Aliases
                 if ( method == 'create' ) method = 'insert';
                 if ( method == 'delete' ) method = 'remove';
 
+                // Custom methods
                 return function () {
                     let args = arguments;
                     let returnValue = false;
