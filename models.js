@@ -114,7 +114,7 @@ module.exports = new Proxy( Mongo( url ), {
 
                         let promise = modelORM[ method ].apply( modelORM, args );
 
-                        promise.then( ( result ) => {
+                        promise.then( result => {
 
                                 if ( returnValue )
                                     result = result.value;
@@ -135,7 +135,7 @@ module.exports = new Proxy( Mongo( url ), {
                             } )
                             .catch( err => {
                                 reject( err );
-                                Log.warn( model + '.' + method, err );
+                                Log.warn( `⚠️  ${method}.${model} :`, err );
                             } );
                     } );
                 };
