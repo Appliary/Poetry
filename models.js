@@ -27,7 +27,7 @@ if ( !url ) {
 // Otherwise, localhost default config
 if ( !url ) url = local;
 
-Log.info( 'Using MongoDB', url );
+Log.info( '🗄  Using MongoDB', url );
 
 module.exports = new Proxy( Mongo( url ), {
     get( db, model ) {
