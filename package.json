@@ -1,6 +1,6 @@
 {
     "name": "poetry",
-    "version": "0.0.89",
+    "version": "0.0.90",
     "description": "Out-of-the-box framework for NodeJS Microservices",
     "repository": "git+https://github.com/Appliary/Poetry.git",
     "main": "lib/index.js",
