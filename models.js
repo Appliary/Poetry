@@ -45,17 +45,28 @@ module.exports = new Proxy( Mongo( url ), {
         if ( model == 'persons' || model == 'peoples' )
             model = 'people';
 
-        // Sugar access to ObjectID
+        // Sugar access to ObjectID  & getCollectionNames
         if ( model == 'objectids' )
             return db.ObjectId;
+        if ( model == 'getcollectionnames' )
+            return db.getCollectionNames;
 
         // Return the Proxy
         return new Proxy( db[ model ], {
             get( modelORM, method ) {
 
+                if ( !method.toLowerCase )
+                    return Log.error( 'Forbidden model access' );
+
                 // Aggregation sugar pipeline builder
                 if ( method.toLowerCase() == 'aggregation' )
                     return Aggregation( modelORM );
+                if ( method.toLowerCase() == 'match' )
+                    return ( a ) => Aggregation( modelORM )
+                        .match( a );
+                if ( method.toLowerCase() == 'search' )
+                    return ( a ) => Aggregation( modelORM )
+                        .search( a );
 
                 // Generic method
                 if ( ~[ 'find', 'count', 'findone' ].indexOf( method ) )
