@@ -29,7 +29,14 @@ if ( !url ) url = local;
 
 Log.info( '🗄  Using MongoDB', url );
 
-module.exports = new Proxy( Mongo( url ), {
+module.exports = new Proxy( Mongo( url, {
+    server: {
+        socketOptions: {
+            socketTimeoutMS: 30000,
+            connectTimeoutMS: 30000
+        }
+    }
+} ), {
     get( db, model ) {
 
         if ( typeof model !== 'string' ) return undefined;
