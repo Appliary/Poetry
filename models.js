@@ -1,4 +1,4 @@
-const Mongo = require( 'promised-mongo' ),
+const Mongo = require( 'pr0mised-m0ng0' ),
     Log = require( './lib/methods/log' ),
     Events = require( './lib/methods/events' ),
     Aggregation = require( './lib/db/Aggregation' ),

@@ -1,31 +1,31 @@
 {
-    "name": "poetry",
-    "version": "0.0.96",
-    "description": "Out-of-the-box framework for NodeJS Microservices",
-    "repository": "git+https://github.com/Appliary/Poetry.git",
-    "main": "lib/index.js",
-    "scripts": {
-        "start": "node app",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "engines": {
-        "node": ">=5.4.0"
-    },
-    "author": "MicCarr <miccarr@me.com>",
-    "license": "ISC",
-    "dependencies": {
-        "async": "^2.1.5",
-        "bcrypt": "^1.0.2",
-        "boom": "^4.0.0",
-        "buffertools": "^2.1.4",
-        "cli": "^1.0.0",
-        "commander": "^2.9.0",
-        "debug": "^2.2.0",
-        "hapi": "^16.1.0",
-        "inert": "^4.0.1",
-        "multicast-events": "^2.1.2",
-        "patrun": "^0.5.0",
-        "promised-mongo": "^1.2.0",
-        "winston": "^2.2.0"
-    }
+  "name": "poetry",
+  "version": "0.0.96",
+  "description": "Out-of-the-box framework for NodeJS Microservices",
+  "repository": "git+https://github.com/Appliary/Poetry.git",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=5.4.0"
+  },
+  "author": "MicCarr <miccarr@me.com>",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.1.5",
+    "bcrypt": "^1.0.2",
+    "boom": "^4.0.0",
+    "buffertools": "^2.1.4",
+    "cli": "^1.0.0",
+    "commander": "^2.9.0",
+    "debug": "^2.2.0",
+    "hapi": "^16.1.0",
+    "inert": "^4.0.1",
+    "multicast-events": "^2.1.2",
+    "patrun": "^0.5.0",
+    "pr0mised-m0ng0": "^2.0.2",
+    "winston": "^2.2.0"
+  }
 }
