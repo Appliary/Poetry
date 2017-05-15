@@ -1,4 +1,4 @@
-const Mongo = require( 'promised-mongo' ),
+const Mongo = require( 'pr0mised-m0ng0' ),
     Log = require( './lib/methods/log' ),
     Events = require( './lib/methods/events' ),
     Aggregation = require( './lib/db/Aggregation' ),
@@ -29,7 +29,14 @@ if ( !url ) url = local;
 
 Log.info( '🗄  Using MongoDB', url );
 
-module.exports = new Proxy( Mongo( url ), {
+module.exports = new Proxy( Mongo( url, {
+    server: {
+        socketOptions: {
+            socketTimeoutMS: 30000,
+            connectTimeoutMS: 30000
+        }
+    }
+} ), {
     get( db, model ) {
 
         if ( typeof model !== 'string' ) return undefined;
