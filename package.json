@@ -23,7 +23,7 @@
         "debug": "^2.2.0",
         "hapi": "^16.1.0",
         "inert": "^4.0.1",
-        "multicast-events": "^2.1.2",
+        "multicast-events": "2.1.2",
         "patrun": "^0.5.0",
         "pr0mised-m0ng0": "^2.0.2",
         "winston": "^2.2.0"
