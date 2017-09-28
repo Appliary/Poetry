@@ -21,7 +21,7 @@
         "cli": "^1.0.0",
         "commander": "^2.9.0",
         "debug": "^2.2.0",
-        "hapi": "^16.1.0",
+        "hapi": "16.6.0",
         "inert": "^4.0.1",
         "multicast-events": "2.1.2",
         "patrun": "^0.5.0",
